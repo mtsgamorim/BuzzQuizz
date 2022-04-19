@@ -136,6 +136,8 @@ p {
     margin-bottom: 20px;
 }
 
+/* INICIO DA PAGINA 2 */
+
 .imagem-topo{
     position: relative;
     display: flex;
@@ -153,13 +155,13 @@ p {
     font-weight: 400;
     font-size: 39px;
     color: #FFFFFF;
-    position: fixed;
+    position: absolute;
     margin-top: 55px;
 }
 
 .pergunta {
     width: 759px;
-    height: 676px;
+    height: 600px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin-top: 30px;
     display: flex;
@@ -182,6 +184,114 @@ p {
     font-weight: 700;
     color: #FFFFFF;
 }
+
+.opcoesResposta {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 36px;
+    margin-top: 10px;
+}
+
+.opcao {
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.opcao img {
+    width: 330px;
+    height: 175px;
+}
+
+.opcao span {
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+}
+
+.areaResultado {
+    width: 759px;
+    height: 430px;
+    background: #FFFFFF;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cabecalho{
+    width: 727px;
+    height: 99px;
+    background-color: #EC362D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 18px;
+}
+
+.cabecalho span {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.informacoes {
+    display: flex;
+    margin-left: 16px;
+    margin-top: 10px;
+}
+
+.informacoes img {
+    width: 364px;
+    height: 273px;
+}
+
+.informacoes p {
+    color: #484848;
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.informacoes div {
+    width: 328px;
+    height: 250px;
+    margin-left: 12px;
+}
+
+.botaoReiniciarQuizz{
+    width: 260px;
+    height: 52px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.botaoReiniciarQuizz span {
+    color: #FFF5F4;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.botaoVoltarHome {
+    width: 219px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.botaoVoltarHome span {
+    color: #818181;
+    font-size: 21px;
+    font-weight: 400;
+}
+
 
 
 
