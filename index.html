@@ -18,7 +18,7 @@
     <!--PRIMEIRA PAGINA // PARA VELA SO TIRAR O ESCONDER DA CLASSE MAIN-->
 
     <main class="PaginaInicial esconder">
-        <div class="quizzEmBranco esconder">
+        <div class="quizzEmBranco">
             <div>
                 <span>Você não criou nenhum </span>
             </div>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="meusQuizzes">
+        <div class="meusQuizzes esconder">
             <div class="texto-icone">
                 <p>Seus Quizzes</p>
                 <ion-icon name="add-circle"></ion-icon>
@@ -82,13 +82,12 @@
                 <!--Area para colocar os Quizzes    //  apagar depois os quizzes individuais  -->
             </div>
         </div>
-
     </main>
 
     <!--PRIMEIRA PAGINA // PARA VELA SO TIRAR O ESCONDER DA CLASSE MAIN-->
 
     <!--SEGUNDA PAGINA // PARA VELA SO TIRAR O ESCONDER DA CLASSE MAIN-->
-    <main class="PaginaDoQuizz">
+    <main class="PaginaDoQuizz esconder">
         <div class="imagem-topo">
             <img src="imagemTeste2.png">
             <p>O quão Potterhead é você?</p>
@@ -205,10 +204,116 @@
     </main>
 
 
-
-
-
     <!--SEGUNDA PAGINA // PARA VELA SO TIRAR O ESCONDER DA CLASSE MAIN-->
+    <!--TERCEIRA PAGINA -->
+    <main class="TerceiraCriacao">
+        <div class="parte1 esconder">
+            <!-- esconder aqui -->
+            <div class="inicio">
+                <h2>Comece pelo começo</h2>
+                <input type="text" class="input_titulo" placeholder="Título do seu quizz">
+                <input type="text" class="input_url" placeholder="URL da imagem do seu quizz">
+                <input type="text" class="input_qntdPerguntas" placeholder="Quantidade de perguntas do quizz">
+                <input type="text" class="Quantidade de níveis do quizz" placeholder="Quantidade de níveis do quizz">
+                <div class="botaoProsseguir">
+                    <span>Prosseguir pra criar perguntas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="parte2 esconder">
+            <!-- esconder aqui -->
+            <div class="criarPerguntas">
+                <h2>Crie suas perguntas</h2>
+                <!-- Area chumbada das perguntas / apagar depois do javascript -->
+                <div class="criacaoPergunta">
+                    <h3>Pergunta 1</h3>
+                    <input type="text" class="input_pergunta" placeholder="Texto da pergunta">
+                    <input type="text" class="input_cor" placeholder="Cor de fundo da pergunta">
+                    <h3>Resposta correta</h3>
+                    <input type="text" class="input_correta" placeholder="Resposta correta">
+                    <input type="text" class="input_img_correta" placeholder="URL da imagem">
+                    <h3>Respostas incorretas</h3>
+                    <input type="text" class="input_incorreta1" placeholder="Resposta incorreta 1">
+                    <input type="text" class="input_img_incorreta1" placeholder="URL da imagem 1">
+                    <div class="espacamento"></div>
+                    <input type="text" class="input_incorreta2" placeholder="Resposta incorreta 2">
+                    <input type="text" class="input_img_incorreta2" placeholder="URL da imagem 2">
+                    <div class="espacamento"></div>
+                    <input type="text" class="input_incorreta3" placeholder="Resposta incorreta 3">
+                    <input type="text" class="input_img_incorreta3" placeholder="URL da imagem 3">
+                </div>
+
+                <div class="criacaoPergunta">
+                    <div class="engloba">
+                        <!-- esconder aqui -->
+                        <h3>Pergunta 2</h3>
+                        <ion-icon name="create-outline"></ion-icon>
+                    </div>
+                    <div class="oculto esconder">
+                        <!-- esconder aqui -->
+                        <h3>Pergunta 2</h3>
+                        <input type="text" class="input_pergunta" placeholder="Texto da pergunta">
+                        <input type="text" class="input_cor" placeholder="Cor de fundo da pergunta">
+                        <h3>Resposta correta</h3>
+                        <input type="text" class="input_correta" placeholder="Resposta correta">
+                        <input type="text" class="input_img_correta" placeholder="URL da imagem">
+                        <h3>Respostas incorretas</h3>
+                        <input type="text" class="input_incorreta1" placeholder="Resposta incorreta 1">
+                        <input type="text" class="input_img_incorreta1" placeholder="URL da imagem 1">
+                        <div class="espacamento"></div>
+                        <input type="text" class="input_incorreta2" placeholder="Resposta incorreta 2">
+                        <input type="text" class="input_img_incorreta2" placeholder="URL da imagem 2">
+                        <div class="espacamento"></div>
+                        <input type="text" class="input_incorreta3" placeholder="Resposta incorreta 3">
+                        <input type="text" class="input_img_incorreta3" placeholder="URL da imagem 3">
+                    </div>
+                </div>
+                <div class="botaoProsseguir">
+                    <span>Prosseguir pra criar níveis</span>
+                </div>
+                <div class="oculto"></div>
+            </div>
+
+
+            <!-- Area chumbada das perguntas / apagar depois do javascript -->
+        </div>
+
+        <div class="parte3">
+            <!-- esconder aqui -->
+            <div class="criarNiveis">
+                <h2>Agora, decida os níveis</h2>
+                <div class="criacaoNivel">
+                    <h3>Nível 1</h3>
+                    <input type="text" class="input_titulo_nivel1" placeholder="Título do nível">
+                    <input type="text" class="input_porcentagem1" placeholder="% de acerto  mínimo">
+                    <input type="text" class="input_img_nível1" placeholder="Cor de fundo da pergunta">
+                    <input type="text" class="input_descricao1" placeholder="Descrição do nível">
+                </div>
+                <div class="criacaoNivel">
+                    <div class="engloba">
+                        <!-- esconder aqui -->
+                        <h3>Nível 2</h3>
+                        <ion-icon name="create-outline"></ion-icon>
+                    </div>
+                    <div class="oculto esconder">
+                        <h3>Nível 2</h3>
+                        <input type="text" class="input_titulo_nivel2" placeholder="Título do nível">
+                        <input type="text" class="input_porcentagem2" placeholder="% de acerto  mínimo">
+                        <input type="text" class="input_img_nível2" placeholder="Cor de fundo da pergunta">
+                        <input type="text" class="input_descricao2" placeholder="Descrição do nível">
+                    </div>
+                </div>
+                <div class="botaoProsseguir">
+                    <span>Finalizar Quizz</span>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    <!--TERCEIRA PAGINA -->
+
 
 
 

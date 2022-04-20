@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #FAFAFA;
@@ -24,6 +29,23 @@ h1 {
     color: #FFFFFF;
 }
 
+h2 {
+    color: #000000;
+    font-weight: 700;
+    font-size: 23px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+h3 {
+    margin-bottom: 20px;
+    color: #000000;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 10px;
+ }
+
+
 main {
     display: flex;
     flex-direction: column;
@@ -36,6 +58,8 @@ p {
     font-size: 20px;
     color: #000000;
 }
+
+/* INICIO DA PAGINA 1 */
 
 .quizzEmBranco {
     margin-top: 146px;
@@ -127,7 +151,7 @@ p {
 
 
 .esconder {
-    display: none;
+    display: none !important;
 }
 
 .texto-icone {
@@ -135,6 +159,8 @@ p {
     align-items: center;
     margin-bottom: 20px;
 }
+
+/* FIM DA PAGINA 1 */
 
 /* INICIO DA PAGINA 2 */
 
@@ -292,10 +318,100 @@ p {
     font-weight: 400;
 }
 
+/* FIM DA PAGINA 2 */
 
+/* INICIO DA PAGINA 3 */
 
+.inicio {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+input {
+    width: 564px;
+    height: 64px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
 
+input::placeholder {
+    color: #BABABA;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    margin-left: 50px;
+}
+
+.botaoProsseguir {
+    width: 368px;
+    height: 54px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.botaoProsseguir span {
+    color: #FFF5F4;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.criarPerguntas {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.criacaoPergunta {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.espacamento {
+    height: 10px;
+}
+ .engloba {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 601px;
+    height: 74px;
+ }
+
+ .engloba ion-icon{
+    font-size: 24px;
+    margin-bottom: 10px;
+    cursor: pointer;
+ }
+
+ .oculto {
+    display: flex;
+    flex-direction: column;
+ }
+
+.criarNiveis {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.criacaoNivel {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
 
 
 
