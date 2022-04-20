@@ -25,7 +25,7 @@
             <div>
                 <span>quizz ainda :(</span>
             </div>
-            <div class="botao">
+            <div class="botao" onclick="irParaCriacaoQuizz()">
                 <span>Criar Quizz</span>
             </div>
         </div>
@@ -36,11 +36,11 @@
                 <ion-icon name="add-circle"></ion-icon>
             </div>
             <div class="quizzes">
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
@@ -54,27 +54,27 @@
         <div class="areaQuizzes">
             <p>Todos os Quizzes</p>
             <div class="quizzes">
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="quizzIndividual">
+                <div class="quizzIndividual" onclick="paginaInicialParaQuizz()">
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
@@ -195,7 +195,7 @@
         <div class="botaoReiniciarQuizz">
             <span>Reiniciar Quizz</span>
         </div>
-        <div class="botaoVoltarHome">
+        <div class="botaoVoltarHome" onclick="quizzParaHome()">
             <span>Voltar pra home</span>
         </div>
         <!--Area para colocar as opçoes    //  apagar depois  -->
@@ -215,8 +215,8 @@
                 <input type="text" class="input_url" placeholder="URL da imagem do seu quizz">
                 <input type="text" class="input_qntdPerguntas" placeholder="Quantidade de perguntas do quizz">
                 <input type="text" class="Quantidade de níveis do quizz" placeholder="Quantidade de níveis do quizz">
-                <div class="botaoProsseguir">
-                    <span>Prosseguir pra criar perguntas</span>
+                <div class="botaoProsseguir" onclick="informacaoCriarQuizz()">
+                    <span>Prosseguir para criar perguntas</span>
                 </div>
             </div>
         </div>
@@ -269,8 +269,8 @@
                         <input type="text" class="input_img_incorreta3" placeholder="URL da imagem 3">
                     </div>
                 </div>
-                <div class="botaoProsseguir">
-                    <span>Prosseguir pra criar níveis</span>
+                <div class="botaoProsseguir" onclick="dadosDasPerguntas()">
+                    <span>Prosseguir para criar níveis</span>
                 </div>
                 <div class="oculto"></div>
             </div>
@@ -304,7 +304,7 @@
                         <input type="text" class="input_descricao2" placeholder="Descrição do nível">
                     </div>
                 </div>
-                <div class="botaoProsseguir">
+                <div class="botaoProsseguir" onclick="finalizarPostarQuizz()">
                     <span>Finalizar Quizz</span>
                 </div>
             </div>
@@ -318,10 +318,10 @@
                     <img src="imagemTeste.png">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </div>
-                <div class="botaoReiniciarQuizz">
-                    <span>Reiniciar Quizz</span>
+                <div class="botaoReiniciarQuizz" onclick="acessarQuizz()">
+                    <span>Acessar Quizz</span>
                 </div>
-                <div class="botaoVoltarHome">
+                <div class="botaoVoltarHome" onclick="criacaoParaHome()">
                     <span>Voltar pra home</span>
                 </div>
             </div>
