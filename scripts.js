@@ -1,3 +1,5 @@
+
+
 const paginaInicial = document.querySelector(".PaginaInicial");
 const paginaQuizz = document.querySelector(".PaginaDoQuizz");
 const paginaCriacao = document.querySelector(".TerceiraCriacao");
@@ -16,7 +18,152 @@ let incorreta3;
 let imgIncorreta1;
 let imgIncorreta2;
 let imgIncorreta3;
+let tituloNivel;
+let porcentagem;
+let imgNivel;
+let descricaoNivel;
+let contadorCliques = 0;
+let contadosAcerto = 0;
+let quizzespecifico;
 
+
+// --------------------   Area Axios --------------------------------------
+const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
+promise.then(gerarQuizzes);
+
+function gerarQuizzes(resposta) {
+    console.log(resposta);
+    document.querySelector(".areaNormal").innerHTML = ""
+    for (let i = 0; i < resposta.data.length; i++) {
+        document.querySelector(".areaNormal").innerHTML += `<div class="quizzIndividual" onclick="paginaInicialParaQuizz(${resposta.data[i].id})">
+        <img src="${resposta.data[i].image}">
+        <p>${resposta.data[i].title}</p>
+    </div>`
+    }
+}
+
+function carregarPaginaDoQuizz(resposta) {
+    paginaQuizz.innerHTML = "";
+    paginaQuizz.innerHTML += `<div class="imagem-topo">
+    <img src="${resposta.data.image}">
+    <p>${resposta.data.title}</p>
+</div>`
+
+    for (let i = 0; i < resposta.data.questions.length; i++) {
+        if (resposta.data.questions[i].answers.length === 4) {
+            paginaQuizz.innerHTML += `<div class="pergunta">
+        <div class="barraTopo">
+            <span>${resposta.data.questions[i].title}</span>
+        </div>
+        <div class="opcoesResposta">
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[0].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[0].text}</span>
+            </div>
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[1].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[1].text}</span>
+            </div>
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[2].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[2].text}</span>
+            </div>
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[3].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[3].text}</span>
+            </div>
+        </div>
+    </div>`
+        }
+        if (resposta.data.questions[i].answers.length === 3) {
+            paginaQuizz.innerHTML += `<div class="pergunta">
+        <div class="barraTopo">
+            <span>${resposta.data.questions[i].title}</span>
+        </div>
+        <div class="opcoesResposta">
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[0].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[0].text}</span>
+            </div>
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[1].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[1].text}</span>
+            </div>
+            <div class="opcao" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[2].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[2].text}</span>
+            </div>
+        </div>
+    </div>`
+        }
+        if (resposta.data.questions[i].answers.length === 2) {
+            paginaQuizz.innerHTML += `<div class="pergunta">
+        <div class="barraTopo">
+            <span>${resposta.data.questions[i].title}</span>
+        </div>
+        <div class="opcoesResposta">
+            <div class="opcao ${resposta.data.questions[i].answers[0].isCorrectAnswer}" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[0].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[0].text}</span>
+            </div>
+            <div class="opcao ${resposta.data.questions[i].answers[1].isCorrectAnswer}" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[1].image}">
+                <br>
+                <span>${resposta.data.questions[i].answers[1].text}</span>
+            </div> 
+        </div>
+    </div>`
+        }
+
+    }
+    paginaQuizz.innerHTML += `<div class="areaResultado esconder">
+    <div class="cabecalho">
+        <span>88% de acerto: Você é praticamente um aluno de Hogwarts!</span>
+    </div>
+    <div class="informacoes">
+        <img src="imagemTeste4.png">
+        <div>
+            <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão
+                abaixo para usar o vira-tempo e reiniciar este teste.</p>
+        </div>
+    </div>
+</div>`
+
+    paginaQuizz.innerHTML += `<div class="botaoReiniciarQuizz">
+    <span>Reiniciar Quizz</span>
+</div>
+<div class="botaoVoltarHome" onclick="quizzParaHome()">
+    <span>Voltar pra home</span>
+</div>`
+    console.log(resposta.data)
+}
+
+function selecionarResposta(elemento) {
+    const pai = elemento.parentNode;
+    if (pai.classList.contains("travar") === false) {
+        if (elemento.classList.contains("true")){
+            contadosAcerto++;
+        }
+        pai.classList.add("travar");
+        const filhos = pai.querySelectorAll(".opcao");
+        for (let i = 0; i < filhos.length; i++) {
+            filhos[i].classList.add("opaco");
+            
+        }
+        elemento.classList.remove("opaco");
+        contadorCliques++;
+        console.log(contadorCliques);
+    
+    }
+}
 // ---------------------    AREA DOS BOTOES     ------------------------
 
 function irParaCriacaoQuizz() {
@@ -107,50 +254,67 @@ function dadosDasPerguntas() {
     imgIncorreta3 = document.querySelectorAll(".input_img_incorreta3")
 
 
-    // if (verificaPergunta() && verificaCor() && verificaResposta() && verificaImagemCorreta() && verificaImagemInCorreta()) {
-    document.querySelector(".criarNiveis").innerHTML = `<div class="criarNiveis">
+    if (verificaPergunta() && verificaCor() && verificaResposta() && verificaImagemCorreta() && verificaImagemInCorreta()) {
+        document.querySelector(".criarNiveis").innerHTML = `<div class="criarNiveis">
         <h2>Agora, decida os níveis</h2>
         <div class="criacaoNivel">
             <h3>Nível 1</h3>
-            <input type="text" class="input_titulo_nivel1" placeholder="Título do nível">
-            <input type="text" class="input_porcentagem1" placeholder="% de acerto  mínimo">
-            <input type="text" class="input_img_nível1" placeholder="Cor de fundo da pergunta">
-            <input type="text" class="input_descricao1" placeholder="Descrição do nível">
+            <input type="text" class="input_titulo_nivel" placeholder="Título do nível">
+            <input type="text" class="input_porcentagem" placeholder="% de acerto  mínimo">
+            <input type="text" class="input_img_nível" placeholder="URL da imagem do nível">
+            <input type="text" class="input_descricao" placeholder="Descrição do nível">
         </div>`
-    for (let i = 2; i <= Number(qntdNiveis); i++) {
-        document.querySelector(".criarNiveis").innerHTML += `<div class="criacaoNivel">
+        for (let i = 2; i <= Number(qntdNiveis); i++) {
+            document.querySelector(".criarNiveis").innerHTML += `<div class="criacaoNivel">
         <div class="engloba">
             <h3>Nível ${i}</h3>
             <ion-icon name="create-outline" onclick="expandirPergunta(this)"></ion-icon>
         </div>
         <div class="oculto esconder">
             <h3>Nível ${i}</h3>
-            <input type="text" class="input_titulo_nivel2" placeholder="Título do nível">
-            <input type="text" class="input_porcentagem2" placeholder="% de acerto  mínimo">
-            <input type="text" class="input_img_nível2" placeholder="Cor de fundo da pergunta">
-            <input type="text" class="input_descricao2" placeholder="Descrição do nível">
+            <input type="text" class="input_titulo_nivel" placeholder="Título do nível">
+            <input type="text" class="input_porcentagem" placeholder="% de acerto  mínimo">
+            <input type="text" class="input_img_nível" placeholder="URL da imagem do nível">
+            <input type="text" class="input_descricao" placeholder="Descrição do nível">
         </div>
     </div>`
-    }
-    document.querySelector(".criarNiveis").innerHTML += `<div class="botaoProsseguir" onclick="finalizarPostarQuizz()">
+        }
+        document.querySelector(".criarNiveis").innerHTML += `<div class="botaoProsseguir" onclick="finalizarPostarQuizz()">
     <span>Finalizar Quizz</span>
 </div>`
 
 
-    document.querySelector(".parte2").classList.add("esconder");
-    document.querySelector(".parte3").classList.remove("esconder");
-    // } else {
-    //   alert("Você deve preencher os dados corretamente");
-    // }
+        document.querySelector(".parte2").classList.add("esconder");
+        document.querySelector(".parte3").classList.remove("esconder");
+    } else {
+        alert("Você deve preencher os dados corretamente");
+    }
 
 }
 
 function finalizarPostarQuizz() {
     //PEGAR INFORMAÇOES DO IMPUT E TRATA-LAS
     // POSTAR O QUIZZ NA API
+    tituloNivel = document.querySelectorAll(".input_titulo_nivel");
+    porcentagem = document.querySelectorAll(".input_porcentagem");
+    imgNivel = document.querySelectorAll(".input_img_nível");
+    descricaoNivel = document.querySelectorAll(".input_descricao");
 
-    document.querySelector(".parte3").classList.add("esconder");
-    document.querySelector(".parte4").classList.remove("esconder");
+
+    if (verificaNivel() && verificaPorcentagem() && verificaImagemCorretaNivel() && verificaDescricao() && peloMenosUm0()) {
+
+
+
+        document.querySelector(".parte3").classList.add("esconder");
+        document.querySelector(".parte4").classList.remove("esconder");
+    } else {
+        alert("Você deve preencher os dados corretamente");
+    }
+
+
+
+
+
 }
 
 function acessarQuizz() {
@@ -168,7 +332,9 @@ function criacaoParaHome() {
     paginaInicial.classList.remove("esconder");
 }
 
-function paginaInicialParaQuizz() {
+function paginaInicialParaQuizz(id) {
+    quizzespecifico = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
+    quizzespecifico.then(carregarPaginaDoQuizz)
     paginaInicial.classList.add("esconder");
     paginaQuizz.classList.remove("esconder");
 }
@@ -179,6 +345,7 @@ function expandirPergunta(elemento) {
     pai.classList.add("esconder");
     pai.parentNode.querySelector(".oculto").classList.remove("esconder");
 }
+
 
 
 
@@ -301,3 +468,63 @@ function verificaImagemInCorreta() {
     return true;
 }
 
+function verificaNivel() {
+    for (let i = 0; i < Number(qntdNiveis); i++) {
+        if (tituloNivel[i].value.length <= 10) {
+            console.log(`Vai dar false no ${i}`);
+            return false;
+        }
+    }
+    console.log("vai dar true");
+    return true;
+}
+
+function verificaPorcentagem() {
+    for (let i = 0; i < Number(qntdNiveis); i++) {
+        if (Number(porcentagem[i].value) >= 0 && Number(porcentagem[i].value) <= 100 && porcentagem[i].value !== "") {
+            console.log(`Vai dar bom no ${i}`);
+        } else {
+            console.log("Problema");
+            return false;
+        }
+    }
+    console.log("vai dar true");
+    return true;
+}
+
+function verificaImagemCorretaNivel() {
+    for (let i = 0; i < Number(qntdNiveis); i++) {
+        if (isValidHttpUrl(imgNivel[i].value)) {
+            console.log(`vai dar true no ${i}`);
+        } else {
+            console.log(`Vai dar false`);
+            return false;
+        }
+    }
+    console.log("Vai dar true em tudo");
+    return true;
+}
+
+function verificaDescricao() {
+    for (let i = 0; i < Number(qntdNiveis); i++) {
+        if (descricaoNivel[i].value.length <= 30) {
+            console.log(`Vai dar false no ${i}`);
+            return false;
+        }
+    }
+    console.log("vai dar true");
+    return true;
+}
+
+function peloMenosUm0() {
+    for (let i = 0; i < Number(qntdNiveis); i++) {
+        if (Number(porcentagem[i].value) === 0 && porcentagem[i].value !== "") {
+            console.log(`Opa tem um 0 no ${i}`);
+            console.log("retornei true")
+            return true;
+        } else {
+            console.log("Problema mas verificacao continua");
+        }
+    }
+    return false;
+}

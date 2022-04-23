@@ -122,11 +122,13 @@ p {
     cursor: pointer;
     margin-bottom: 5px;
     margin-right: 10px;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
 }
 
 .quizzIndividual img{
     width: 340px;
     height: 181px;
+    
 }
 
 .quizzIndividual p{
@@ -427,6 +429,17 @@ input::placeholder {
     margin-bottom: 10px;
 }
 
+.opaco {
+    opacity: 0.3;
+}
+
+.vermelho {
+    color:red;
+}
+
+.verde {
+    color: green;
+}
 
 @media (max-width: 1100px){
 
