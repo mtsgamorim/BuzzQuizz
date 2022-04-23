@@ -225,7 +225,6 @@
             <!-- esconder aqui -->
             <div class="criarPerguntas">
                 <h2>Crie suas perguntas</h2>
-                <!-- Area chumbada das perguntas / apagar depois do javascript -->
                 <div class="criacaoPergunta">
                     <h3>Pergunta 1</h3>
                     <input type="text" class="input_pergunta" placeholder="Texto da pergunta">
@@ -248,7 +247,7 @@
                     <div class="engloba">
                         <!-- esconder aqui -->
                         <h3>Pergunta 2</h3>
-                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name="create-outline" onclick="expandirPergunta(this)"></ion-icon>
                     </div>
                     <div class="oculto esconder">
                         <!-- esconder aqui -->
@@ -272,7 +271,6 @@
                 <div class="botaoProsseguir" onclick="dadosDasPerguntas()">
                     <span>Prosseguir para criar níveis</span>
                 </div>
-                <div class="oculto"></div>
             </div>
 
 
@@ -292,9 +290,8 @@
                 </div>
                 <div class="criacaoNivel">
                     <div class="engloba">
-                        <!-- esconder aqui -->
                         <h3>Nível 2</h3>
-                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name="create-outline" onclick="expandirPergunta(this)"></ion-icon>
                     </div>
                     <div class="oculto esconder">
                         <h3>Nível 2</h3>
