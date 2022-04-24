@@ -285,7 +285,7 @@ function dadosDasPerguntas() {
     imgIncorreta3 = document.querySelectorAll(".input_img_incorreta3")
 
 
-    if (verificaPergunta() && verificaCor() && verificaResposta() && verificaImagemCorreta() && verificaImagemInCorreta()) {
+    if (verificaPergunta() && verificaCor() && verificaResposta() && verificaImagemCorreta() && verificaImagemInCorreta() && verificaSeTemIncorreta()) {
         document.querySelector(".criarNiveis").innerHTML = `<div class="criarNiveis">
         <h2>Agora, decida os níveis</h2>
         <div class="criacaoNivel">
@@ -417,7 +417,6 @@ function verificaPergunta() {
 
 function verificaCor() {
     console.log(corPergunta[0].value);
-    let arrayLetras = ["a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"];
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (corPergunta[i].value.length !== 7 || corPergunta[i].value[0] !== "#") {
             console.log(`Vai dar false no ${i} da cor`);
