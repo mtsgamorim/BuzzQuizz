@@ -41,6 +41,7 @@ function gerarQuizzes(resposta) {
         document.querySelector(".areaNormal").innerHTML += `<div class="quizzIndividual" onclick="paginaInicialParaQuizz(${resposta.data[i].id})">
         <img src="${resposta.data[i].image}">
         <p>${resposta.data[i].title}</p>
+        <div class="degrade"></div>
     </div>`
     }
 }
@@ -55,6 +56,7 @@ function carregarPaginaDoQuizz(resposta) {
     paginaQuizz.innerHTML += `<div class="imagem-topo">
     <img src="${resposta.data.image}">
     <p>${resposta.data.title}</p>
+    <div class="degrade2"></div>
 </div>`
 quizzFuncional = resposta;
 qntdPerguntasQuizzEspecifico = 0;
@@ -165,15 +167,15 @@ function selecionarResposta(elemento) {
 }
 
 function scrollDelay0() {
-    document.querySelector(".op0").scrollIntoView();
+    document.querySelector(".op0").lastChild.scrollIntoView();
 }
 
 function scrollDelay1() {
-    document.querySelector(".op1").scrollIntoView();
+    document.querySelector(".op1").lastChild.scrollIntoView();
 }
 
 function scrollDelay2() {
-    document.querySelector(".op2").scrollIntoView();
+    document.querySelector(".op2").lastChild.scrollIntoView();
 }
 
 function scrollDelayFinal() {
