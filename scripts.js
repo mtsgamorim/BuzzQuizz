@@ -56,7 +56,7 @@ function carregarPaginaDoQuizz(resposta) {
     <img src="${resposta.data.image}">
     <p>${resposta.data.title}</p>
 </div>`
-quizzFuncional = resposta.data;
+quizzFuncional = resposta;
 qntdPerguntasQuizzEspecifico = 0;
 contadorCliques = 0;
 contadosAcerto = 0;
@@ -96,7 +96,7 @@ contadosAcerto = 0;
     
     </div>`
 
-    paginaQuizz.innerHTML += `<div class="botaoReiniciarQuizz">
+    paginaQuizz.innerHTML += `<div class="botaoReiniciarQuizz" onclick="reiniciarQuizz()">
     <span>Reiniciar Quizz</span>
     </div>
     <div class="botaoVoltarHome" onclick="quizzParaHome()">
@@ -152,8 +152,8 @@ function selecionarResposta(elemento) {
             resultado = Math.ceil(resultado);
             console.log(resultado);
             aux = 0;
-            for(let i = 0; i < quizzFuncional.levels.length; i++){
-                if(resultado >= quizzFuncional.levels[i].minValue){
+            for(let i = 0; i < quizzFuncional.data.levels.length; i++){
+                if(resultado >= quizzFuncional.data.levels[i].minValue){
                     aux = i;        // i
                 }
             }
@@ -177,16 +177,21 @@ function scrollDelay2() {
 
 function scrollDelayFinal() {
     document.querySelector(".areaResultado").innerHTML = `<div class="cabecalho">
-            <span>${resultado}% de acerto: ${quizzFuncional.levels[aux].title}</span>
+            <span>${resultado}% de acerto: ${quizzFuncional.data.levels[aux].title}</span>
         </div>
         <div class="informacoes">
-            <img src="${quizzFuncional.levels[aux].image}">
+            <img src="${quizzFuncional.data.levels[aux].image}">
             <div>
-                <p>${quizzFuncional.levels[aux].text}</p>
+                <p>${quizzFuncional.data.levels[aux].text}</p>
             </div>
         </div>`
     document.querySelector(".areaResultado").classList.remove("esconder");
     document.querySelector(".areaResultado").scrollIntoView();
+}
+
+function reiniciarQuizz() {
+    document.querySelector(".imagem-topo").scrollIntoView();
+    carregarPaginaDoQuizz(quizzFuncional);
 }
 
 // ---------------------    AREA DOS BOTOES     ------------------------
