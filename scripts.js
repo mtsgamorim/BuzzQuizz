@@ -64,13 +64,14 @@ contadosAcerto = 0;
     for (let i = 0; i < resposta.data.questions.length; i++) {
 
         paginaQuizz.innerHTML += `<div class="pergunta">
-        <div class="barraTopo">
+        <div class="barraTopo pintar${i}">
             <span>${resposta.data.questions[i].title}</span>
         </div>
         <div class="opcoesResposta op${i}">
             
         </div>
     </div>`
+        document.querySelector(`.pintar${i}`).style.backgroundColor = resposta.data.questions[i].color;
         qntdPerguntasQuizzEspecifico++;
     //EMBARALHAR O ARRAY ANSWERS
     resposta.data.questions[i].answers = resposta.data.questions[i].answers.sort(comparador);
