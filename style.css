@@ -434,11 +434,11 @@ input::placeholder {
 }
 
 .vermelho {
-    color:red;
+    color: red !important;
 }
 
 .verde {
-    color: green;
+    color: green !important;
 }
 
 @media (max-width: 1100px){

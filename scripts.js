@@ -26,7 +26,6 @@ let contadorCliques = 0;
 let contadosAcerto = 0;
 let quizzespecifico;
 
-
 // --------------------   Area Axios --------------------------------------
 const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
 promise.then(gerarQuizzes);
@@ -50,77 +49,29 @@ function carregarPaginaDoQuizz(resposta) {
 </div>`
 
     for (let i = 0; i < resposta.data.questions.length; i++) {
-        if (resposta.data.questions[i].answers.length === 4) {
-            paginaQuizz.innerHTML += `<div class="pergunta">
+
+        paginaQuizz.innerHTML += `<div class="pergunta">
         <div class="barraTopo">
             <span>${resposta.data.questions[i].title}</span>
         </div>
-        <div class="opcoesResposta">
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[0].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[0].text}</span>
-            </div>
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[1].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[1].text}</span>
-            </div>
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[2].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[2].text}</span>
-            </div>
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[3].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[3].text}</span>
-            </div>
+        <div class="opcoesResposta op${i}">
+            
         </div>
     </div>`
-        }
-        if (resposta.data.questions[i].answers.length === 3) {
-            paginaQuizz.innerHTML += `<div class="pergunta">
-        <div class="barraTopo">
-            <span>${resposta.data.questions[i].title}</span>
-        </div>
-        <div class="opcoesResposta">
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[0].image}">
+        for (let j = 0; j < resposta.data.questions[i].answers.length; j++) {
+            if (resposta.data.questions[i].answers[j].isCorrectAnswer) {
+                document.querySelector(`.op${i}`).innerHTML += `<div class="opcao correto" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[j].image}">
                 <br>
-                <span>${resposta.data.questions[i].answers[0].text}</span>
-            </div>
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[1].image}">
+                <span class="corTexto">${resposta.data.questions[i].answers[j].text}</span>
+                </div>`
+            } else {
+                document.querySelector(`.op${i}`).innerHTML += `<div class="opcao incorreto" onclick="selecionarResposta(this)">
+                <img src="${resposta.data.questions[i].answers[j].image}">
                 <br>
-                <span>${resposta.data.questions[i].answers[1].text}</span>
-            </div>
-            <div class="opcao" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[2].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[2].text}</span>
-            </div>
-        </div>
-    </div>`
-        }
-        if (resposta.data.questions[i].answers.length === 2) {
-            paginaQuizz.innerHTML += `<div class="pergunta">
-        <div class="barraTopo">
-            <span>${resposta.data.questions[i].title}</span>
-        </div>
-        <div class="opcoesResposta">
-            <div class="opcao ${resposta.data.questions[i].answers[0].isCorrectAnswer}" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[0].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[0].text}</span>
-            </div>
-            <div class="opcao ${resposta.data.questions[i].answers[1].isCorrectAnswer}" onclick="selecionarResposta(this)">
-                <img src="${resposta.data.questions[i].answers[1].image}">
-                <br>
-                <span>${resposta.data.questions[i].answers[1].text}</span>
-            </div> 
-        </div>
-    </div>`
+                <span class="corTexto">${resposta.data.questions[i].answers[j].text}</span>
+                </div>`
+            }
         }
 
     }
@@ -135,34 +86,67 @@ function carregarPaginaDoQuizz(resposta) {
                 abaixo para usar o vira-tempo e reiniciar este teste.</p>
         </div>
     </div>
-</div>`
+    </div>`
 
     paginaQuizz.innerHTML += `<div class="botaoReiniciarQuizz">
     <span>Reiniciar Quizz</span>
-</div>
-<div class="botaoVoltarHome" onclick="quizzParaHome()">
+    </div>
+    <div class="botaoVoltarHome" onclick="quizzParaHome()">
     <span>Voltar pra home</span>
-</div>`
-    console.log(resposta.data)
+    </div>`
+    document.querySelector(".imagem-topo").scrollIntoView();
 }
+
 
 function selecionarResposta(elemento) {
     const pai = elemento.parentNode;
+    console.log(pai);
     if (pai.classList.contains("travar") === false) {
-        if (elemento.classList.contains("true")){
+        if (elemento.classList.contains("correto")) {
             contadosAcerto++;
         }
+        console.log(elemento.querySelector(".corTexto"))
         pai.classList.add("travar");
         const filhos = pai.querySelectorAll(".opcao");
         for (let i = 0; i < filhos.length; i++) {
             filhos[i].classList.add("opaco");
-            
+
+            if (filhos[i].classList.contains("correto")) {
+                filhos[i].querySelector(".corTexto").classList.add("verde");
+            } else {
+                filhos[i].querySelector(".corTexto").classList.add("vermelho");
+            }
+
         }
         elemento.classList.remove("opaco");
         contadorCliques++;
-        console.log(contadorCliques);
-    
+        console.log(contadosAcerto);
+
+        // MELHORAR COM UM FOR SE DER TEMPO
+        if(pai.classList.contains("op0")){
+            setTimeout(scrollDelay0, 2000);
+        }
+        if(pai.classList.contains("op1")){
+            setTimeout(scrollDelay1, 2000);
+        }
+        if(pai.classList.contains("op2")){
+            setTimeout(scrollDelay2, 2000);
+        }
+        // MELHORAR COM UM FOR SE DER TEMPO
+
     }
+}
+
+function scrollDelay0() {
+    document.querySelector(".op1").lastChild.scrollIntoView();
+}
+
+function scrollDelay1() {
+    document.querySelector(".op2").lastChild.scrollIntoView();
+}
+
+function scrollDelay2() {
+    document.querySelector(".op3").lastChild.scrollIntoView();
 }
 // ---------------------    AREA DOS BOTOES     ------------------------
 
