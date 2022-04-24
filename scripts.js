@@ -25,6 +25,10 @@ let descricaoNivel;
 let contadorCliques = 0;
 let contadosAcerto = 0;
 let quizzespecifico;
+let qntdPerguntasQuizzEspecifico;
+let quizzFuncional;               // vai ter a data do quizz que estamos trabalhando
+let resultado;
+let aux;
 
 // --------------------   Area Axios --------------------------------------
 const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -41,12 +45,21 @@ function gerarQuizzes(resposta) {
     }
 }
 
+function comparador() { 
+	return Math.random() - 0.5; 
+}
+
 function carregarPaginaDoQuizz(resposta) {
+
     paginaQuizz.innerHTML = "";
     paginaQuizz.innerHTML += `<div class="imagem-topo">
     <img src="${resposta.data.image}">
     <p>${resposta.data.title}</p>
 </div>`
+quizzFuncional = resposta.data;
+qntdPerguntasQuizzEspecifico = 0;
+contadorCliques = 0;
+contadosAcerto = 0;
 
     for (let i = 0; i < resposta.data.questions.length; i++) {
 
@@ -58,6 +71,10 @@ function carregarPaginaDoQuizz(resposta) {
             
         </div>
     </div>`
+        qntdPerguntasQuizzEspecifico++;
+    //EMBARALHAR O ARRAY ANSWERS
+    resposta.data.questions[i].answers = resposta.data.questions[i].answers.sort(comparador);
+
         for (let j = 0; j < resposta.data.questions[i].answers.length; j++) {
             if (resposta.data.questions[i].answers[j].isCorrectAnswer) {
                 document.querySelector(`.op${i}`).innerHTML += `<div class="opcao correto" onclick="selecionarResposta(this)">
@@ -76,16 +93,7 @@ function carregarPaginaDoQuizz(resposta) {
 
     }
     paginaQuizz.innerHTML += `<div class="areaResultado esconder">
-    <div class="cabecalho">
-        <span>88% de acerto: Você é praticamente um aluno de Hogwarts!</span>
-    </div>
-    <div class="informacoes">
-        <img src="imagemTeste4.png">
-        <div>
-            <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão
-                abaixo para usar o vira-tempo e reiniciar este teste.</p>
-        </div>
-    </div>
+    
     </div>`
 
     paginaQuizz.innerHTML += `<div class="botaoReiniciarQuizz">
@@ -121,10 +129,13 @@ function selecionarResposta(elemento) {
         elemento.classList.remove("opaco");
         contadorCliques++;
         console.log(contadosAcerto);
+        console.log(pai)
+
 
         // MELHORAR COM UM FOR SE DER TEMPO
         if(pai.classList.contains("op0")){
             setTimeout(scrollDelay0, 2000);
+            console.log("entrei no primeiro");
         }
         if(pai.classList.contains("op1")){
             setTimeout(scrollDelay1, 2000);
@@ -134,20 +145,50 @@ function selecionarResposta(elemento) {
         }
         // MELHORAR COM UM FOR SE DER TEMPO
 
+        if(qntdPerguntasQuizzEspecifico === contadorCliques) {
+            console.log(contadosAcerto);
+            console.log(contadorCliques);
+            resultado = (contadosAcerto / contadorCliques) * 100;
+            resultado = Math.ceil(resultado);
+            console.log(resultado);
+            aux = 0;
+            for(let i = 0; i < quizzFuncional.levels.length; i++){
+                if(resultado >= quizzFuncional.levels[i].minValue){
+                    aux = i;        // i
+                }
+            }
+            setTimeout(scrollDelayFinal, 2000)
+        }
+
     }
 }
 
 function scrollDelay0() {
-    document.querySelector(".op1").lastChild.scrollIntoView();
+    document.querySelector(".op0").scrollIntoView();
 }
 
 function scrollDelay1() {
-    document.querySelector(".op2").lastChild.scrollIntoView();
+    document.querySelector(".op1").scrollIntoView();
 }
 
 function scrollDelay2() {
-    document.querySelector(".op3").lastChild.scrollIntoView();
+    document.querySelector(".op2").scrollIntoView();
 }
+
+function scrollDelayFinal() {
+    document.querySelector(".areaResultado").innerHTML = `<div class="cabecalho">
+            <span>${resultado}% de acerto: ${quizzFuncional.levels[aux].title}</span>
+        </div>
+        <div class="informacoes">
+            <img src="${quizzFuncional.levels[aux].image}">
+            <div>
+                <p>${quizzFuncional.levels[aux].text}</p>
+            </div>
+        </div>`
+    document.querySelector(".areaResultado").classList.remove("esconder");
+    document.querySelector(".areaResultado").scrollIntoView();
+}
+
 // ---------------------    AREA DOS BOTOES     ------------------------
 
 function irParaCriacaoQuizz() {
