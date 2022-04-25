@@ -34,11 +34,14 @@ let answers = [];
 let objeto = {};
 let leveis = [];
 
-
+carregarPagina1();
 
 // --------------------   Area Axios --------------------------------------
-const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
-promise.then(gerarQuizzes);
+function carregarPagina1() {
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
+    promise.then(gerarQuizzes);
+}
+
 
 function gerarQuizzes(resposta) {
     console.log(resposta);
@@ -52,8 +55,8 @@ function gerarQuizzes(resposta) {
     }
 }
 
-function comparador() { 
-	return Math.random() - 0.5; 
+function comparador() {
+    return Math.random() - 0.5;
 }
 
 function carregarPaginaDoQuizz(resposta) {
@@ -64,10 +67,10 @@ function carregarPaginaDoQuizz(resposta) {
     <p>${resposta.data.title}</p>
     <div class="degrade2"></div>
 </div>`
-quizzFuncional = resposta;
-qntdPerguntasQuizzEspecifico = 0;
-contadorCliques = 0;
-contadosAcerto = 0;
+    quizzFuncional = resposta;
+    qntdPerguntasQuizzEspecifico = 0;
+    contadorCliques = 0;
+    contadosAcerto = 0;
 
     for (let i = 0; i < resposta.data.questions.length; i++) {
 
@@ -81,8 +84,8 @@ contadosAcerto = 0;
     </div>`
         document.querySelector(`.pintar${i}`).style.backgroundColor = resposta.data.questions[i].color;
         qntdPerguntasQuizzEspecifico++;
-    //EMBARALHAR O ARRAY ANSWERS
-    resposta.data.questions[i].answers = resposta.data.questions[i].answers.sort(comparador);
+        //EMBARALHAR O ARRAY ANSWERS
+        resposta.data.questions[i].answers = resposta.data.questions[i].answers.sort(comparador);
 
         for (let j = 0; j < resposta.data.questions[i].answers.length; j++) {
             if (resposta.data.questions[i].answers[j].isCorrectAnswer) {
@@ -142,27 +145,27 @@ function selecionarResposta(elemento) {
 
 
         // MELHORAR COM UM FOR SE DER TEMPO
-        if(pai.classList.contains("op0")){
+        if (pai.classList.contains("op0")) {
             setTimeout(scrollDelay0, 2000);
             console.log("entrei no primeiro");
         }
-        if(pai.classList.contains("op1")){
+        if (pai.classList.contains("op1")) {
             setTimeout(scrollDelay1, 2000);
         }
-        if(pai.classList.contains("op2")){
+        if (pai.classList.contains("op2")) {
             setTimeout(scrollDelay2, 2000);
         }
         // MELHORAR COM UM FOR SE DER TEMPO
 
-        if(qntdPerguntasQuizzEspecifico === contadorCliques) {
+        if (qntdPerguntasQuizzEspecifico === contadorCliques) {
             console.log(contadosAcerto);
             console.log(contadorCliques);
             resultado = (contadosAcerto / contadorCliques) * 100;
             resultado = Math.ceil(resultado);
             console.log(resultado);
             aux = 0;
-            for(let i = 0; i < quizzFuncional.data.levels.length; i++){
-                if(resultado >= quizzFuncional.data.levels[i].minValue){
+            for (let i = 0; i < quizzFuncional.data.levels.length; i++) {
+                if (resultado >= quizzFuncional.data.levels[i].minValue) {
                     aux = i;        // i
                 }
             }
@@ -571,28 +574,28 @@ function peloMenosUm0() {
 
 
 function criacaoDoObjetoQuizz() {
-    for(let i = 0; i < qntdPerguntas; i++) {
-        
+    for (let i = 0; i < qntdPerguntas; i++) {
+
         answers.push({
             text: textoResposta[i].value,
             image: imgRespostaCorreta[i].value,
             isCorrectAnswer: true
         })
-        if(incorreta1[i].value !== ""){
+        if (incorreta1[i].value !== "") {
             answers.push({
                 text: incorreta1[i].value,
                 image: imgIncorreta1[i].value,
                 isCorrectAnswer: false
             })
         }
-        if(incorreta2[i].value !== ""){
+        if (incorreta2[i].value !== "") {
             answers.push({
                 text: incorreta2[i].value,
                 image: imgIncorreta2[i].value,
                 isCorrectAnswer: false
             })
         }
-        if(incorreta3[i].value !== ""){
+        if (incorreta3[i].value !== "") {
             answers.push({
                 text: incorreta3[i].value,
                 image: imgIncorreta3[i].value,
@@ -604,12 +607,12 @@ function criacaoDoObjetoQuizz() {
             title: textoPergunta[i].value,
             color: corPergunta[i].value,
             answers: answers
-        }) 
+        })
 
         answers = [];
     }
 
-    for(let i = 0; i < qntdNiveis; i++){
+    for (let i = 0; i < qntdNiveis; i++) {
         leveis.push({
             title: tituloNivel[i].value,
             image: imgNivel[i].value,
