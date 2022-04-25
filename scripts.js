@@ -332,7 +332,7 @@ function finalizarPostarQuizz() {
     if (verificaNivel() && verificaPorcentagem() && verificaImagemCorretaNivel() && verificaDescricao() && peloMenosUm0()) {
 
         criacaoDoObjetoQuizz();
-
+        axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", objeto);
         document.querySelector(".parte3").classList.add("esconder");
         document.querySelector(".parte4").classList.remove("esconder");
     } else {
