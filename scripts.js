@@ -334,17 +334,26 @@ function finalizarPostarQuizz() {
 
         criacaoDoObjetoQuizz();
         const postpromise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", objeto);
-        postpromise.then(pegarID);
+        postpromise.then(pegarID); 
         document.querySelector(".parte3").classList.add("esconder");
         document.querySelector(".parte4").classList.remove("esconder");
     } else {
         alert("Você deve preencher os dados corretamente");
     }
+}
 
-
-
-
-
+function arrumarpagfinal(){
+    document.querySelector(".areaFinal").innerHTML = `<h2>Seu Quizz está pronto!</h2>
+    <div class="quizzIndividual maior">
+        <img src=${objeto.image}>
+        <p>${objeto.title}</p>
+    </div>
+    <div class="botaoReiniciarQuizz" onclick="acessarQuizz()">
+        <span>Acessar Quizz</span>
+    </div>
+    <div class="botaoVoltarHome" onclick="criacaoParaHome()">
+        <span>Voltar pra home</span>
+    </div>`
 }
 
 function pegarID(nossoQuizz) {
@@ -620,7 +629,7 @@ function criacaoDoObjetoQuizz() {
         questions: questoes,
         levels: leveis
     }
-
+    arrumarpagfinal();
     console.log(questoes);
     console.log(leveis);
 }
