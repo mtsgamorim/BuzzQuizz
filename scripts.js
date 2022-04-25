@@ -35,6 +35,7 @@ let objeto = {};
 let leveis = [];
 let proximaPergunta;
 let pai;
+let nossosIDS = [];
 
 carregarPagina1();
 
@@ -332,7 +333,8 @@ function finalizarPostarQuizz() {
     if (verificaNivel() && verificaPorcentagem() && verificaImagemCorretaNivel() && verificaDescricao() && peloMenosUm0()) {
 
         criacaoDoObjetoQuizz();
-        axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", objeto);
+        const postpromise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", objeto);
+        postpromise.then(pegarID);
         document.querySelector(".parte3").classList.add("esconder");
         document.querySelector(".parte4").classList.remove("esconder");
     } else {
@@ -343,6 +345,11 @@ function finalizarPostarQuizz() {
 
 
 
+}
+
+function pegarID(nossoQuizz) {
+    console.log(nossoQuizz);
+    nossosIDS.push(nossoQuizz.data.id);
 }
 
 function acessarQuizz() {
