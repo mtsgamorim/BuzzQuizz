@@ -29,6 +29,12 @@ let qntdPerguntasQuizzEspecifico;
 let quizzFuncional;               // vai ter a data do quizz que estamos trabalhando
 let resultado;
 let aux;
+let questoes = [];
+let answers = [];
+let objeto = {};
+let leveis = [];
+
+
 
 // --------------------   Area Axios --------------------------------------
 const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -336,7 +342,7 @@ function finalizarPostarQuizz() {
 
     if (verificaNivel() && verificaPorcentagem() && verificaImagemCorretaNivel() && verificaDescricao() && peloMenosUm0()) {
 
-
+        criacaoDoObjetoQuizz();
 
         document.querySelector(".parte3").classList.add("esconder");
         document.querySelector(".parte4").classList.remove("esconder");
@@ -487,7 +493,7 @@ function verificaImagemInCorreta() {
                 return false;
             }
         }
-        if (incorreta2[i].value !== "") {
+        if (incorreta3[i].value !== "") {
             if (isValidHttpUrl(imgIncorreta3[i].value)) {
                 console.log("deu ruim")
                 console.log("beleza")
@@ -559,4 +565,66 @@ function peloMenosUm0() {
         }
     }
     return false;
+}
+
+
+
+
+function criacaoDoObjetoQuizz() {
+    for(let i = 0; i < qntdPerguntas; i++) {
+        
+        answers.push({
+            text: textoResposta[i].value,
+            image: imgRespostaCorreta[i].value,
+            isCorrectAnswer: true
+        })
+        if(incorreta1[i].value !== ""){
+            answers.push({
+                text: incorreta1[i].value,
+                image: imgIncorreta1[i].value,
+                isCorrectAnswer: false
+            })
+        }
+        if(incorreta2[i].value !== ""){
+            answers.push({
+                text: incorreta2[i].value,
+                image: imgIncorreta2[i].value,
+                isCorrectAnswer: false
+            })
+        }
+        if(incorreta3[i].value !== ""){
+            answers.push({
+                text: incorreta3[i].value,
+                image: imgIncorreta3[i].value,
+                isCorrectAnswer: false
+            })
+        }
+
+        questoes.push({
+            title: textoPergunta[i].value,
+            color: corPergunta[i].value,
+            answers: answers
+        }) 
+
+        answers = [];
+    }
+
+    for(let i = 0; i < qntdNiveis; i++){
+        leveis.push({
+            title: tituloNivel[i].value,
+            image: imgNivel[i].value,
+            text: descricaoNivel[i].value,
+            minValue: porcentagem[i].value
+        })
+    }
+
+    objeto = {
+        title: tituloQuizz,
+        image: imgQuizz,
+        questions: questoes,
+        levels: leveis
+    }
+
+    console.log(questoes);
+    console.log(leveis);
 }
