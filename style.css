@@ -192,6 +192,7 @@ p {
     color: #FFFFFF;
     position: absolute;
     margin-top: 55px;
+    word-wrap: break-word;
 }
 
 .degrade2 {
@@ -226,6 +227,7 @@ p {
     font-size: 23px;
     font-weight: 700;
     color: #FFFFFF;
+    word-wrap: break-word;
 }
 
 .opcoesResposta {
@@ -238,6 +240,7 @@ p {
 .opcao {
     margin-right: 25px;
     margin-bottom: 10px;
+    width: 330px;
 }
 
 .opcao img {
@@ -249,6 +252,7 @@ p {
     font-weight: 700;
     font-size: 20px;
     color: #000000;
+    word-wrap: break-word;
 }
 
 .areaResultado {
@@ -292,6 +296,7 @@ p {
     color: #484848;
     font-weight: 700;
     font-size: 19px;
+    word-wrap: break-word;
 }
 
 .informacoes div {
