@@ -33,6 +33,8 @@ let questoes = [];
 let answers = [];
 let objeto = {};
 let leveis = [];
+let proximaPergunta;
+let pai;
 
 carregarPagina1();
 
@@ -119,7 +121,7 @@ function carregarPaginaDoQuizz(resposta) {
 
 
 function selecionarResposta(elemento) {
-    const pai = elemento.parentNode;
+    pai = elemento.parentNode;
     console.log(pai);
     if (pai.classList.contains("travar") === false) {
         if (elemento.classList.contains("correto")) {
@@ -145,17 +147,9 @@ function selecionarResposta(elemento) {
 
 
         // MELHORAR COM UM FOR SE DER TEMPO
-        if (pai.classList.contains("op0")) {
-            setTimeout(scrollDelay0, 2000);
-            console.log("entrei no primeiro");
-        }
-        if (pai.classList.contains("op1")) {
-            setTimeout(scrollDelay1, 2000);
-        }
-        if (pai.classList.contains("op2")) {
-            setTimeout(scrollDelay2, 2000);
-        }
-        // MELHORAR COM UM FOR SE DER TEMPO
+        
+        setTimeout(scrollDelay, 2000);
+        
 
         if (qntdPerguntasQuizzEspecifico === contadorCliques) {
             console.log(contadosAcerto);
@@ -175,16 +169,8 @@ function selecionarResposta(elemento) {
     }
 }
 
-function scrollDelay0() {
-    document.querySelector(".op0").lastChild.scrollIntoView();
-}
-
-function scrollDelay1() {
-    document.querySelector(".op1").lastChild.scrollIntoView();
-}
-
-function scrollDelay2() {
-    document.querySelector(".op2").lastChild.scrollIntoView();
+function scrollDelay() {
+    pai.lastChild.scrollIntoView();
 }
 
 function scrollDelayFinal() {
