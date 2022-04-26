@@ -129,6 +129,7 @@ p {
     flex-wrap: wrap;
 }
 .quizzesPessoais {
+    width: 1051px;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;

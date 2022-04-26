@@ -409,12 +409,14 @@ function quizzParaHome() {
     paginaQuizz.classList.add("esconder");
     paginaInicial.classList.remove("esconder");
     carregarPagina1();
+    document.querySelector(".PaginaInicial").scrollIntoView();
 }
 
 function criacaoParaHome() {
     document.querySelector(".parte4").classList.add("esconder");
     paginaInicial.classList.remove("esconder");
     carregarPagina1();
+    document.querySelector(".PaginaInicial").scrollIntoView();
 }
 
 function paginaInicialParaQuizz(id) {
