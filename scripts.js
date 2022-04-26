@@ -43,7 +43,7 @@ let Quizzpessoal = {};
 
 meusQuizzesSerelizados = localStorage.getItem("ids");
 meusQuizzes = JSON.parse(meusQuizzesSerelizados);
-console.log(meusQuizzes);
+
 
 
 carregarPagina1();
@@ -56,17 +56,17 @@ function carregarPagina1() {
 
 
 function gerarQuizzes(resposta) {
-    console.log(resposta);
-    if (meusQuizzes !== null){
+
+    if (meusQuizzes !== null) {
         document.querySelector(".quizzEmBranco").classList.add("esconder");
         document.querySelector(".seusQuizzes").classList.remove("esconder");
         document.querySelector(".quizzesPessoais").innerHTML = "";
 
-        for(let i = 0; i < meusQuizzes.length; i++){
-            Quizzpessoal = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/"+ meusQuizzes[i]);
+        for (let i = 0; i < meusQuizzes.length; i++) {
+            Quizzpessoal = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/" + meusQuizzes[i]);
             Quizzpessoal.then(areapessoal);
-            console.log(Quizzpessoal);
-            
+
+
         }
     }
     document.querySelector(".areaNormal").innerHTML = "";
@@ -79,7 +79,7 @@ function gerarQuizzes(resposta) {
     }
 }
 
-function areapessoal(Quizzepessoal){
+function areapessoal(Quizzepessoal) {
     document.querySelector(".quizzesPessoais").innerHTML += `<div class="quizzIndividual" onclick="paginaInicialParaQuizz(${Quizzepessoal.data.id})">
     <img src="${Quizzepessoal.data.image}">
     <p>${Quizzepessoal.data.title}</p>
@@ -152,12 +152,12 @@ function carregarPaginaDoQuizz(resposta) {
 
 function selecionarResposta(elemento) {
     pai = elemento.parentNode;
-    console.log(pai);
+
     if (pai.classList.contains("travar") === false) {
         if (elemento.classList.contains("correto")) {
             contadosAcerto++;
         }
-        console.log(elemento.querySelector(".corTexto"))
+
         pai.classList.add("travar");
         const filhos = pai.querySelectorAll(".opcao");
         for (let i = 0; i < filhos.length; i++) {
@@ -172,21 +172,21 @@ function selecionarResposta(elemento) {
         }
         elemento.classList.remove("opaco");
         contadorCliques++;
-        console.log(contadosAcerto);
-        console.log(pai)
+
+
 
 
         // MELHORAR COM UM FOR SE DER TEMPO
-        
+
         setTimeout(scrollDelay, 2000);
-        
+
 
         if (qntdPerguntasQuizzEspecifico === contadorCliques) {
-            console.log(contadosAcerto);
-            console.log(contadorCliques);
+
+
             resultado = (contadosAcerto / contadorCliques) * 100;
             resultado = Math.ceil(resultado);
-            console.log(resultado);
+
             aux = 0;
             for (let i = 0; i < quizzFuncional.data.levels.length; i++) {
                 if (resultado >= quizzFuncional.data.levels[i].minValue) {
@@ -228,6 +228,10 @@ function irParaCriacaoQuizz() {
     paginaInicial.classList.add("esconder");
     paginaCriacao.classList.remove("esconder");
     document.querySelector(".inicio").classList.remove("esconder");
+    document.querySelector(".input_titulo").value = "";
+    document.querySelector(".input_url").value = "";
+    document.querySelector(".input_qntdPerguntas").value = "";
+    document.querySelector(".input_qntdNiveisQuizz").value = "";
 }
 
 function informacaoCriarQuizz() {
@@ -363,7 +367,7 @@ function finalizarPostarQuizz() {
 
         criacaoDoObjetoQuizz();
         const postpromise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", objeto);
-        postpromise.then(pegarID); 
+        postpromise.then(pegarID);
         document.querySelector(".parte3").classList.add("esconder");
         document.querySelector(".parte4").classList.remove("esconder");
     } else {
@@ -371,7 +375,7 @@ function finalizarPostarQuizz() {
     }
 }
 
-function arrumarpagfinal(){
+function arrumarpagfinal() {
     document.querySelector(".areaFinal").innerHTML = `<h2>Seu Quizz está pronto!</h2>
     <div class="quizzIndividual maior" onclick="acessarQuizz()">
         <img src=${objeto.image}>
@@ -386,7 +390,7 @@ function arrumarpagfinal(){
 }
 
 function pegarID(nossoQuizz) {
-    console.log(nossoQuizz);
+
     id = nossoQuizz.data.id;
 
     meusQuizzes.push(id)
@@ -394,8 +398,8 @@ function pegarID(nossoQuizz) {
     localStorage.setItem("ids", nossoQuizzSerelizados);
     let meusQuizzesSerelizados = localStorage.getItem("ids");
     meusQuizzes = JSON.parse(meusQuizzesSerelizados);
-    
-    console.log(`Verificar se eu tenho um id do quizz que eu criei id: ${meusQuizzes}`)
+
+
 }
 
 function acessarQuizz() {
@@ -463,19 +467,19 @@ const qntdNivelValido = qntdNiveis => qntdNiveis >= 2;
 function verificaPergunta() {
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (textoPergunta[i].value.length <= 20) {
-            console.log(`Vai dar false no ${i}`);
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
 function verificaCor() {
-    console.log(corPergunta[0].value);
+
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (corPergunta[i].value.length !== 7 || corPergunta[i].value[0] !== "#") {
-            console.log(`Vai dar false no ${i} da cor`);
+
             return false;
         }
         for (let indice = 1; indice < corPergunta[i].value.length; indice++) {
@@ -486,40 +490,40 @@ function verificaCor() {
             }
         }
     }
-    console.log("vai dar true na cor");
+
     return true;
 }
 
 function verificaResposta() {
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (textoResposta[i].value.length === 0) {
-            console.log(`Vai dar false no ${i}`);
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
 function verificaImagemCorreta() {
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (isValidHttpUrl(imgRespostaCorreta[i].value)) {
-            console.log("vai dar true");
+
             return true;
         }
     }
-    console.log(`Vai dar false`);
+
     return false;
 }
 
 function verificaSeTemIncorreta() {
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (incorreta1[i].value.length === 0 && incorreta2[i].value.length === 0 && incorreta3[i].value.length === 0) {
-            console.log(`Vai dar false no ${i}`);
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
@@ -527,89 +531,89 @@ function verificaImagemInCorreta() {
     for (let i = 0; i < Number(qntdPerguntas); i++) {
         if (incorreta1[i].value !== "") {
             if (isValidHttpUrl(imgIncorreta1[i].value)) {
-                console.log("Beleza!")
+
             } else {
-                console.log("deu ruim")
+
                 return false;
             }
         }
         if (incorreta2[i].value !== "") {
             if (isValidHttpUrl(imgIncorreta2[i].value)) {
-                console.log("Beleza")
+
             } else {
-                console.log("deu ruim")
+
                 return false;
             }
         }
         if (incorreta3[i].value !== "") {
             if (isValidHttpUrl(imgIncorreta3[i].value)) {
-                console.log("deu ruim")
-                console.log("beleza")
+
+
             } else {
                 return false;
             }
         }
     }
-    console.log("vai dar tudo trueeee")
+
     return true;
 }
 
 function verificaNivel() {
     for (let i = 0; i < Number(qntdNiveis); i++) {
         if (tituloNivel[i].value.length <= 10) {
-            console.log(`Vai dar false no ${i}`);
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
 function verificaPorcentagem() {
     for (let i = 0; i < Number(qntdNiveis); i++) {
         if (Number(porcentagem[i].value) >= 0 && Number(porcentagem[i].value) <= 100 && porcentagem[i].value !== "") {
-            console.log(`Vai dar bom no ${i}`);
+
         } else {
-            console.log("Problema");
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
 function verificaImagemCorretaNivel() {
     for (let i = 0; i < Number(qntdNiveis); i++) {
         if (isValidHttpUrl(imgNivel[i].value)) {
-            console.log(`vai dar true no ${i}`);
+
         } else {
-            console.log(`Vai dar false`);
+
             return false;
         }
     }
-    console.log("Vai dar true em tudo");
+
     return true;
 }
 
 function verificaDescricao() {
     for (let i = 0; i < Number(qntdNiveis); i++) {
         if (descricaoNivel[i].value.length <= 30) {
-            console.log(`Vai dar false no ${i}`);
+
             return false;
         }
     }
-    console.log("vai dar true");
+
     return true;
 }
 
 function peloMenosUm0() {
     for (let i = 0; i < Number(qntdNiveis); i++) {
         if (Number(porcentagem[i].value) === 0 && porcentagem[i].value !== "") {
-            console.log(`Opa tem um 0 no ${i}`);
-            console.log("retornei true")
+
+
             return true;
         } else {
-            console.log("Problema mas verificacao continua");
+
         }
     }
     return false;
@@ -673,6 +677,5 @@ function criacaoDoObjetoQuizz() {
         levels: leveis
     }
     arrumarpagfinal();
-    console.log(questoes);
-    console.log(leveis);
+
 }
