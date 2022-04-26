@@ -36,6 +36,7 @@ let leveis = [];
 let proximaPergunta;
 let pai;
 let nossosIDS = [];
+let meusQuizzes;
 
 carregarPagina1();
 
@@ -350,6 +351,9 @@ function finalizarPostarQuizz() {
 function pegarID(nossoQuizz) {
     console.log(nossoQuizz);
     nossosIDS.push(nossoQuizz.data.id);
+    localStorage.setItem("ids", nossosIDS);
+    meusQuizzes = localStorage.getItem("ids");
+    console.log(`Verificar se eu tenho um id do quizz que eu criei id: ${meusQuizzes}`)
 }
 
 function acessarQuizz() {
