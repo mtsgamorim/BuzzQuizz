@@ -103,7 +103,16 @@ p {
     font-size: 21px;
     color: #EC362D;
 }
-
+.botao ion-icon{
+    font-size: 24px;
+    color: #EC362D;
+}
+.superior{
+    display: flex;
+}
+.superior p {
+    margin-right: 17px;
+}
 .areaQuizzes {
     width: 1051px;
     margin-top: 30px;
@@ -119,7 +128,11 @@ p {
     display: flex;
     flex-wrap: wrap;
 }
-
+.quizzesPessoais {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
 .quizzIndividual {
     position: relative;
     cursor: pointer;
@@ -470,21 +483,17 @@ input::placeholder {
     }
     .meusQuizzes {
         width: 100%;
-    }
-    .quizzIndividual{
-        margin-bottom: 14px;
-        width: 100%;
-        margin-right: 0px;
-    }
-    .quizzIndividual img{
-        width: 100%;
-        height: 181px;
-    }    
+    } 
     .areaQuizzes {
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
         margin-top: 30px;
+    }
+    .quizzesPessoais {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
     .meusQuizzes {
         width: 100%;
@@ -521,5 +530,19 @@ input::placeholder {
     }
     .opcoesResposta {
         width: 100%;
+    }
+    .superior{
+        justify-content: space-between;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .criacaoPergunta {
+       width: 90%;
+    }
+    .criarPerguntas {
+        width: 90%;
+    }
+    .criarNiveis {
+        width: 90%;
     }
     }

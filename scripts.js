@@ -35,6 +35,7 @@ let objeto = {};
 let leveis = [];
 let proximaPergunta;
 let pai;
+let id;
 let nossosIDS = [];
 let meusQuizzes = [];
 let meusQuizzesSerelizados;
