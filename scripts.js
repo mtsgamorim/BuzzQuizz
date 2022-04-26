@@ -375,6 +375,8 @@ function pegarID(nossoQuizz) {
 
 function acessarQuizz() {
     document.querySelector(".parte4").classList.add("esconder");
+    quizzespecifico = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${meusQuizzes[meusQuizzes.length - 1]}`);
+    quizzespecifico.then(carregarPaginaDoQuizz);
     paginaQuizz.classList.remove("esconder");
 }
 
@@ -389,8 +391,6 @@ function criacaoParaHome() {
 }
 
 function paginaInicialParaQuizz(id) {
-    quizzespecifico = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
-    quizzespecifico.then(carregarPaginaDoQuizz)
     paginaInicial.classList.add("esconder");
     paginaQuizz.classList.remove("esconder");
 }
