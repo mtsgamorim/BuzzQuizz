@@ -36,7 +36,13 @@ let leveis = [];
 let proximaPergunta;
 let pai;
 let nossosIDS = [];
-let meusQuizzes;
+let meusQuizzes = [];
+let meusQuizzesSerelizados;
+
+meusQuizzesSerelizados = localStorage.getItem("ids");
+meusQuizzes = JSON.parse(meusQuizzesSerelizados);
+console.log(meusQuizzes);
+
 
 carregarPagina1();
 
@@ -360,8 +366,10 @@ function arrumarpagfinal(){
 function pegarID(nossoQuizz) {
     console.log(nossoQuizz);
     nossosIDS.push(nossoQuizz.data.id);
-    localStorage.setItem("ids", nossosIDS);
-    meusQuizzes = localStorage.getItem("ids");
+    const nossosIDSerelizados = JSON.stringify(nossosIDS)
+    localStorage.setItem("ids", nossosIDSerelizados);
+    const meusQuizzesSerelizados = localStorage.getItem("ids");
+    meusQuizzes = meusQuizzes.push(JSON.parse(meusQuizzesSerelizados));
     console.log(`Verificar se eu tenho um id do quizz que eu criei id: ${meusQuizzes}`)
 }
 
