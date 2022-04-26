@@ -61,7 +61,9 @@ p {
 }
 
 /* INICIO DA PAGINA 1 */
-
+.seusQuizzes {
+    margin-top: 138px;
+}
 .quizzEmBranco {
     margin-top: 146px;
     width: 1051px;

@@ -35,9 +35,10 @@ let objeto = {};
 let leveis = [];
 let proximaPergunta;
 let pai;
-let id;
+let nossosIDS = [];
 let meusQuizzes = [];
 let meusQuizzesSerelizados;
+let Quizzpessoal = {};
 
 meusQuizzesSerelizados = localStorage.getItem("ids");
 meusQuizzes = JSON.parse(meusQuizzesSerelizados);
@@ -55,7 +56,19 @@ function carregarPagina1() {
 
 function gerarQuizzes(resposta) {
     console.log(resposta);
-    document.querySelector(".areaNormal").innerHTML = ""
+    if (meusQuizzes !== null){
+        document.querySelector(".quizzEmBranco").classList.add("esconder");
+        document.querySelector(".seusQuizzes").classList.remove("esconder");
+        document.querySelector(".quizzesPessoais").innerHTML = "";
+
+        for(let i = 0; i < meusQuizzes.length; i++){
+            Quizzpessoal = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/"+ meusQuizzes[i]);
+            Quizzpessoal.then(areapessoal);
+            console.log(Quizzpessoal);
+            
+        }
+    }
+    document.querySelector(".areaNormal").innerHTML = "";
     for (let i = 0; i < resposta.data.length; i++) {
         document.querySelector(".areaNormal").innerHTML += `<div class="quizzIndividual" onclick="paginaInicialParaQuizz(${resposta.data[i].id})">
         <img src="${resposta.data[i].image}">
@@ -63,6 +76,14 @@ function gerarQuizzes(resposta) {
         <div class="degrade"></div>
     </div>`
     }
+}
+
+function areapessoal(Quizzepessoal){
+    document.querySelector(".quizzesPessoais").innerHTML += `<div class="quizzIndividual" onclick="paginaInicialParaQuizz(${Quizzepessoal.data.id})">
+    <img src="${Quizzepessoal.data.image}">
+    <p>${Quizzepessoal.data.title}</p>
+    <div class="degrade"></div>
+</div>`
 }
 
 function comparador() {
@@ -351,7 +372,7 @@ function finalizarPostarQuizz() {
 
 function arrumarpagfinal(){
     document.querySelector(".areaFinal").innerHTML = `<h2>Seu Quizz está pronto!</h2>
-    <div class="quizzIndividual maior">
+    <div class="quizzIndividual maior" onclick="acessarQuizz()">
         <img src=${objeto.image}>
         <p>${objeto.title}</p>
     </div>
@@ -386,14 +407,18 @@ function acessarQuizz() {
 function quizzParaHome() {
     paginaQuizz.classList.add("esconder");
     paginaInicial.classList.remove("esconder");
+    carregarPagina1();
 }
 
 function criacaoParaHome() {
     document.querySelector(".parte4").classList.add("esconder");
     paginaInicial.classList.remove("esconder");
+    carregarPagina1();
 }
 
 function paginaInicialParaQuizz(id) {
+    quizzespecifico = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
+    quizzespecifico.then(carregarPaginaDoQuizz);
     paginaInicial.classList.add("esconder");
     paginaQuizz.classList.remove("esconder");
 }
